@@ -64,7 +64,23 @@ function Home() {
     return (
         <>
             <div className="home-page">
-                <h1>Home page</h1>
+                <div className="game-description-div">
+                    <h1>The Amazing Tower Defense Game</h1>
+                    <p>
+                        Anim do eiusmod in ut amet ullamco magna magna ipsum
+                        duis laboris sunt. Ea Lorem exercitation duis quis
+                        labore voluptate eiusmod consectetur irure.
+                    </p>
+                    <div className="download-btns-div">
+                        <button className="download-game-btn">
+                            Download Now
+                        </button>
+                        <button className="download-game-btn">Play Now</button>
+                    </div>
+                </div>
+                <div className="qr-code-div">
+                    <h1>QR Code</h1>
+                </div>
             </div>
         </>
     );

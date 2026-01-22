@@ -8,7 +8,8 @@
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
-    background-image: url("assets/WhatsApp\ Image\ 2026-01-13\ at\ 6.56.39\ PM.jpeg");
+    background: linear-gradient(rgba(88, 24, 124, 0.55), rgba(40, 20, 90, 0.65)),
+        url("assets/WhatsApp\ Image\ 2026-01-13\ at\ 6.56.39\ PM.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -21,4 +22,50 @@
     justify-content: space-around;
     width: 900px;
     margin: 0 auto;
+}
+
+.navbar a {
+    color: white;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    background: rgba(19, 0, 34, 0.15);
+    backdrop-filter: blur(5px);
+    font-size: 1.4rem;
+}
+.home-page {
+    /* background-color: rgba(0, 0, 0, 0.8); */
+
+    background: rgba(19, 0, 34, 0.15);
+    backdrop-filter: blur(5px);
+    width: 900px;
+    margin: 0 auto;
+    border-radius: 0.4rem;
+    display: flex;
+    margin-top: 25rem;
+}
+
+.game-description-div {
+    width: 48%;
+    padding: 0 1rem;
+    /* border: 1px solid white; */
+}
+.download-btns-div {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+.download-btns-div button {
+    padding: 0.6rem;
+    border-radius: 0.4rem;
+    border: none;
+    font-size: 1.5rem;
+    background-color: blueviolet;
+    cursor: pointer;
+}
+
+.qr-code-div {
+    text-align: center;
 }
