@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import {
     Link,
     Routes,
@@ -8,6 +8,12 @@ import {
     Outlet,
 } from "react-router-dom";
 import "./App.css";
+import img1 from "./assets/adeptus-mechanicus.png";
+import img2 from "./assets/dark-angel-tyranids.png";
+import img3 from "./assets/dark-magician.png";
+import img4 from "./assets/man-in-fantasy-battlefield.png";
+import img5 from "./assets/spacewolf-daemon.png";
+import img6 from "./assets/warhammer-bloodAngel-necrons.png";
 
 function App() {
     const [count, setCount] = useState(0);
@@ -63,6 +69,7 @@ function About() {
 function Home() {
     return (
         <>
+            <ScreenshotGallery />
             <div className="home-page">
                 <div className="game-description-div">
                     <h1>The Amazing Tower Defense Game</h1>
@@ -86,6 +93,33 @@ function Home() {
     );
 }
 
+function ScreenshotGallery() {
+    const [picture, setPicture] = useState([
+        img1,
+        img2,
+        img3,
+        img4,
+        img5,
+        img6,
+    ]);
+
+    const [ind, setInd] = useState(0);
+    return (
+        <>
+            <div className="gallery-div">
+                <button className="gallery-btn prev-btn">{"<"}</button>
+                <img
+                    src={picture[ind]}
+                    alt=""
+                    srcset=""
+                    className="gallery-img"
+                />
+                <button className="gallery-btn next-btn">{">"}</button>
+            </div>
+        </>
+    );
+}
+
 function Company() {
     return (
         <div className="company-page">
@@ -94,3 +128,6 @@ function Company() {
     );
 }
 export default App;
+
+// Should what the game, story, reason for game, team member,
+// home=> video, walkthrough, or screenshot, pictures
