@@ -94,6 +94,7 @@ function Home() {
 }
 
 function ScreenshotGallery() {
+    const [ind, setInd] = useState(0);
     const [picture, setPicture] = useState([
         img1,
         img2,
@@ -103,18 +104,35 @@ function ScreenshotGallery() {
         img6,
     ]);
 
-    const [ind, setInd] = useState(0);
+    function clickPrevious() {
+        if (ind === 0) {
+            setInd(picture.length - 1);
+            return;
+        }
+        setInd(ind - 1);
+    }
+
+    function clickNext() {
+        if (ind >= picture.length - 1) {
+            setInd(0);
+            return;
+        }
+        setInd(ind + 1);
+    }
+
     return (
         <>
             <div className="gallery-div">
-                <button className="gallery-btn prev-btn">{"<"}</button>
-                <img
-                    src={picture[ind]}
-                    alt=""
-                    srcset=""
-                    className="gallery-img"
-                />
-                <button className="gallery-btn next-btn">{">"}</button>
+                <button
+                    onClick={clickPrevious}
+                    className="gallery-btn prev-btn"
+                >
+                    {"<"}
+                </button>
+                <img src={picture[ind]} alt="" className="gallery-img" />
+                <button onClick={clickNext} className="gallery-btn next-btn">
+                    {">"}
+                </button>
             </div>
         </>
     );
