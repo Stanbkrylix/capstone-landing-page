@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
     Link,
     Routes,
@@ -66,6 +66,7 @@ function About() {
         </>
     );
 }
+
 function Home() {
     return (
         <>
@@ -104,6 +105,14 @@ function ScreenshotGallery() {
         img6,
     ]);
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setInd((prev) => (prev >= picture.length - 1 ? 0 : prev + 1));
+        }, 5000);
+
+        return () => clearInterval(intervalId);
+    }, [picture.length]);
+
     function clickPrevious() {
         if (ind === 0) {
             setInd(picture.length - 1);
@@ -119,6 +128,10 @@ function ScreenshotGallery() {
         }
         setInd(ind + 1);
     }
+    function clickImageTracker(imageNum) {
+        console.log(imageNum);
+        setInd(imageNum);
+    }
 
     return (
         <>
@@ -133,6 +146,22 @@ function ScreenshotGallery() {
                 <button onClick={clickNext} className="gallery-btn next-btn">
                     {">"}
                 </button>
+            </div>
+            <div className="gallery-image-tracker-div">
+                <div className="gallery-image-tracker">
+                    {picture.map((pic, i) => (
+                        <span
+                            className="image-tracker"
+                            key={i}
+                            style={
+                                ind === i ? { backgroundColor: "white" } : {}
+                            }
+                            onClick={() => clickImageTracker(i)}
+                        >
+                            {/* tracker{" "} */}
+                        </span>
+                    ))}
+                </div>
             </div>
         </>
     );
