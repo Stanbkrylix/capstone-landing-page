@@ -8,6 +8,7 @@ import {
     Outlet,
 } from "react-router-dom";
 import "./App.css";
+
 import img1 from "./assets/adeptus-mechanicus.png";
 import img2 from "./assets/dark-angel-tyranids.png";
 import img3 from "./assets/dark-magician.png";
@@ -24,8 +25,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
+                        <Route path="/story" element={<Story />} />
                         <Route path="/about" element={<About />} />
-                        <Route path="/company" element={<Company />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
@@ -50,8 +51,8 @@ function Navbar() {
         <>
             <div className="navbar">
                 <Link to="/">Home</Link>
+                <Link to="/story">Story </Link>
                 <Link to="/about">About </Link>
-                <Link to="/company">Company </Link>
             </div>
         </>
     );
@@ -68,6 +69,12 @@ function About() {
 }
 
 function Home() {
+    const [btnEnable, setBtnEnable] = useState(true);
+
+    function toEnableBtn() {
+        setBtnEnable(false);
+    }
+
     return (
         <>
             <ScreenshotGallery />
@@ -79,18 +86,100 @@ function Home() {
                         duis laboris sunt. Ea Lorem exercitation duis quis
                         labore voluptate eiusmod consectetur irure.
                     </p>
-                    <div className="download-btns-div">
-                        <button className="download-game-btn">
-                            Download Now
-                        </button>
-                        <button className="download-game-btn">Play Now</button>
-                    </div>
+                    <VerificationForm toEnableBtn={toEnableBtn} />
+                    <button className="download-game-btn" disabled={btnEnable}>
+                        Download Now
+                    </button>
+                    {/* <button className="download-game-btn">Play Now</button> */}
                 </div>
                 <div className="qr-code-div">
                     <h1>QR Code</h1>
                 </div>
             </div>
         </>
+    );
+}
+
+function VerificationForm({ toEnableBtn }) {
+    const [formInput, setFormInput] = useState({
+        name: "",
+        age: "",
+        email: "",
+    });
+
+    function resetFormInputs() {
+        setFormInput({
+            name: "",
+            age: "",
+            email: "",
+        });
+    }
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+
+        setFormInput((prev) => ({ ...prev, [name]: value }));
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        if (!formInput.name || !formInput.age || !formInput.email) {
+            alert("Please fill out all of the inputs");
+            return;
+        }
+
+        if (formInput.age < 13) {
+            alert("You are to young for this game");
+            return;
+        }
+
+        console.log(formInput);
+        resetFormInputs();
+        toEnableBtn();
+
+        // return;
+    }
+    return (
+        <div className="verification-div">
+            <h2 className="verify-form-header">Verify Person</h2>
+            <form className="verification-form" onSubmit={handleSubmit}>
+                <label htmlFor="name">
+                    <span>Name:</span>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="name"
+                        value={formInput.name}
+                        onChange={handleChange}
+                    />
+                </label>
+
+                <label htmlFor="age">
+                    <span>Age:</span>
+                    <input
+                        type="number"
+                        name="age"
+                        id=""
+                        placeholder="age"
+                        value={formInput.age}
+                        onChange={handleChange}
+                    />
+                </label>
+
+                <label htmlFor="email">
+                    <span>Email:</span>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="email"
+                        value={formInput.email}
+                        onChange={handleChange}
+                    />
+                </label>
+
+                <input type="submit" value="Verify" className="verify-btn" />
+            </form>
+        </div>
     );
 }
 
@@ -167,10 +256,19 @@ function ScreenshotGallery() {
     );
 }
 
-function Company() {
+function Story() {
     return (
-        <div className="company-page">
-            <h1>About the company</h1>
+        <div className="story-page">
+            <h1>About the Story</h1>
+            <p>
+                Excepteur sit nulla ipsum exercitation velit nostrud.Lorem
+                exercitation Lorem fugiat Lorem anim cillum ex irure
+                veniam.Fugiat culpa aliquip ipsum fugiat adipisicing culpa esse
+                anim.Minim reprehenderit dolor consequat aliqua nulla ullamco
+                nostrud.Exercitation dolore magna exercitation non aliquip
+                cupidatat non commodo consectetur nisi amet eiusmod.Lorem ipsum
+                aute non aute adipisicing adipisicing velit nulla.
+            </p>
         </div>
     );
 }
