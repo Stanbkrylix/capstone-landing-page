@@ -1,4 +1,6 @@
-import { use, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import { useEffect, useState } from "react";
 import {
     Link,
     Routes,
@@ -133,6 +135,7 @@ function Home() {
 
 function VerificationForm({ toEnableBtn }) {
     const [formInput, setFormInput] = useState({
+        id: "",
         name: "",
         age: "",
         email: "",
@@ -140,6 +143,7 @@ function VerificationForm({ toEnableBtn }) {
 
     function resetFormInputs() {
         setFormInput({
+            id: "",
             name: "",
             age: "",
             email: "",
@@ -149,7 +153,7 @@ function VerificationForm({ toEnableBtn }) {
     function handleChange(e) {
         const { name, value } = e.target;
 
-        setFormInput((prev) => ({ ...prev, [name]: value }));
+        setFormInput((prev) => ({ ...prev, [name]: value, id: uuidv4() }));
     }
 
     function handleSubmit(e) {
