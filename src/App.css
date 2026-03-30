@@ -68,6 +68,7 @@
     background-color: rgba(25, 4, 49, 0.863);
     /* border: 1px solid white; */
     padding: 0.6rem;
+    margin-bottom: 1rem;
 }
 .gallery-image-tracker {
     width: 900px;
@@ -111,6 +112,7 @@
 .game-description-div {
     width: 48%;
     padding: 0 1rem;
+    /* flex-grow: 1; */
     /* border: 1px solid white; */
 }
 .download-btns-div {
@@ -121,6 +123,7 @@
 }
 .verification-div {
     border: 1px solid white;
+    /* width: 80%; */
     border-radius: 0.6rem;
     margin-bottom: 1rem;
 }
@@ -172,4 +175,29 @@
 
 .qr-code-div {
     text-align: center;
+    flex-grow: 1;
+    /* width: ; */
+}
+.qr-code-div h1,
+.qr-code-div h2 {
+    padding: 0;
+    margin: 0;
+}
+.qr-code-div h1 {
+    margin-bottom: 0.5rem;
+}
+.qr-img {
+    border: 1px solid white;
+    width: 200px;
+    height: 200px;
+    border-radius: 0.5rem;
+}
+
+/* About page */
+.creators-about-section {
+    display: flex;
+}
+.about-img {
+    width: 200px;
+    border-radius: 0.5rem;
 }

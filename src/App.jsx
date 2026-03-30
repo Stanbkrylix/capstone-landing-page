@@ -15,6 +15,9 @@ import img3 from "./assets/dark-magician.png";
 import img4 from "./assets/man-in-fantasy-battlefield.png";
 import img5 from "./assets/spacewolf-daemon.png";
 import img6 from "./assets/warhammer-bloodAngel-necrons.png";
+import aboutImg1 from "./assets/young-man-misty-city.png";
+import aboutImg2 from "./assets/young-man-desert-city.png";
+import aboutImg3 from "./assets/young-man-metro-city.png";
 
 function App() {
     const [count, setCount] = useState(0);
@@ -59,10 +62,38 @@ function Navbar() {
 }
 
 function About() {
+    const [aboutInfo, setAboutInfo] = useState([
+        {
+            img: aboutImg1,
+            name: "Misty Man",
+            story: " Veniam est ut ad occaecat enim commodo officia anim excepteur sit dolore.",
+        },
+
+        {
+            img: aboutImg2,
+            name: "Desert Man",
+            story: " Veniam est ut ad occaecat enim commodo officia anim excepteur sit dolore.",
+        },
+
+        {
+            img: aboutImg3,
+            name: "Metro Man",
+            story: " Veniam est ut ad occaecat enim commodo officia anim excepteur sit dolore.",
+        },
+    ]);
     return (
         <>
             <div className="about-page">
                 <h1>This the about page </h1>
+                <div className="creators-about-section">
+                    {aboutInfo.map((info, i) => (
+                        <div className="creators-about-cards" key={i}>
+                            <img src={info.img} alt="" className="about-img" />
+                            <h2 className="about-name">{info.name}</h2>
+                            <p className="about-story">{info.story}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );
@@ -87,13 +118,13 @@ function Home() {
                         labore voluptate eiusmod consectetur irure.
                     </p>
                     <VerificationForm toEnableBtn={toEnableBtn} />
-                    <button className="download-game-btn" disabled={btnEnable}>
-                        Download Now
-                    </button>
+
                     {/* <button className="download-game-btn">Play Now</button> */}
                 </div>
                 <div className="qr-code-div">
+                    <h2>Verify Age for</h2>
                     <h1>QR Code</h1>
+                    <img src="" alt="" className="qr-img" />
                 </div>
             </div>
         </>
@@ -204,7 +235,7 @@ function ScreenshotGallery() {
 
     function clickPrevious() {
         if (ind === 0) {
-            setInd(picture.length - 1);
+            setInd((prev) => prev - 1);
             return;
         }
         setInd(ind - 1);
