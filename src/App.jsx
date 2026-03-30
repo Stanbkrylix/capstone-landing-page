@@ -6,7 +6,7 @@ import {
     Routes,
     Route,
     useParams,
-    BrowserRouter,
+    HashRouter,
     Outlet,
 } from "react-router-dom";
 import "./App.css";
@@ -26,7 +26,7 @@ function App() {
 
     return (
         <>
-            <BrowserRouter>
+            <HashRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
@@ -34,7 +34,7 @@ function App() {
                         <Route path="/about" element={<About />} />
                     </Route>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </>
     );
 }
