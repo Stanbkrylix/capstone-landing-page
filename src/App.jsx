@@ -1,4 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
+import { supabase } from "./Services/supabaseClient";
+import { getItems, addItem } from "./Services/itemServices";
+import SendEmailReal from "./Services/email";
 
 import { useEffect, useState } from "react";
 import {
@@ -104,6 +107,17 @@ function About() {
 function Home() {
     const [btnEnable, setBtnEnable] = useState(true);
 
+    useEffect(() => {
+        async function runTest() {
+            const data = getItems().then((data) => {
+                console.log(data);
+            });
+            // console.log(data);
+        }
+
+        // runTest();
+    }, []);
+
     function toEnableBtn() {
         setBtnEnable(false);
     }
@@ -135,7 +149,6 @@ function Home() {
 
 function VerificationForm({ toEnableBtn }) {
     const [formInput, setFormInput] = useState({
-        id: "",
         name: "",
         age: "",
         email: "",
@@ -143,7 +156,6 @@ function VerificationForm({ toEnableBtn }) {
 
     function resetFormInputs() {
         setFormInput({
-            id: "",
             name: "",
             age: "",
             email: "",
@@ -153,10 +165,10 @@ function VerificationForm({ toEnableBtn }) {
     function handleChange(e) {
         const { name, value } = e.target;
 
-        setFormInput((prev) => ({ ...prev, [name]: value, id: uuidv4() }));
+        setFormInput((prev) => ({ ...prev, [name]: value }));
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         if (!formInput.name || !formInput.age || !formInput.email) {
             alert("Please fill out all of the inputs");
@@ -168,12 +180,36 @@ function VerificationForm({ toEnableBtn }) {
             return;
         }
 
-        console.log(formInput);
+        addItem(formInput).then((data) => {
+            console.log("added item", data);
+        });
+
+        getItems().then((data) => {
+            console.log("from console log", formInput);
+            console.log(data);
+        });
+
+        SendEmailReal();
         resetFormInputs();
         toEnableBtn();
 
         // return;
     }
+
+    // function sendMail(e) {
+    //     e.preventDefault();
+    //     const email = "juniordelva1@gmail.com";
+    //     const subject = encodeURIComponent("check this out");
+    //     const body = encodeURIComponent(
+    //         "here is the link: https://yourwebsite.com",
+    //     );
+
+    //     window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    //     console.log("send");
+
+    //     // return mailToLink;
+    // }
+
     return (
         <div className="verification-div">
             <h2 className="verify-form-header">Verify Person</h2>
@@ -213,6 +249,7 @@ function VerificationForm({ toEnableBtn }) {
                 </label>
 
                 <input type="submit" value="Verify" className="verify-btn" />
+                {/* <button onClick={sendMail}> send mail</button> */}
             </form>
         </div>
     );
