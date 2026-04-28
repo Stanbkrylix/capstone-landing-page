@@ -60,6 +60,7 @@
 }
 .gallery-img {
     width: 600px;
+    height: 700px;
     /* height: 500px; */
 
     border-radius: 0.5rem;
@@ -90,16 +91,24 @@
 .image-tracker:hover {
     transform: scale(1.04);
 }
+.home-page,
+.story-page,
+.about-page {
+    max-width: 900px;
+    width: 100%;
+}
 
 .home-page {
     /* background-color: rgba(0, 0, 0, 0.8); */
 
     background: rgba(19, 0, 34, 0.15);
     backdrop-filter: blur(5px);
-    width: 900px;
+    /* width: 900px; */
     margin: 0 auto;
+    padding: 0.5rem;
     border-radius: 0.4rem;
     display: flex;
+    justify-content: center;
     /* margin-top: 25rem; */
 }
 .story-page,
@@ -112,6 +121,8 @@
 .game-description-div {
     width: 48%;
     padding: 0 1rem;
+    border: 1px solid white;
+    border-radius: 0.5rem;
     /* flex-grow: 1; */
     /* border: 1px solid white; */
 }
@@ -196,8 +207,202 @@
 /* About page */
 .creators-about-section {
     display: flex;
+    gap: 1rem;
 }
 .about-img {
     width: 200px;
     border-radius: 0.5rem;
+}
+
+/* Story section */
+
+.story-p {
+    text-align: start;
+}
+
+/* =========================
+   TABLET (max-width: 1024px)
+========================= */
+@media (max-width: 1024px) {
+    .navbar {
+        width: 100%;
+        padding: 1rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .home-page,
+    .story-page,
+    .about-page {
+        width: 90%;
+    }
+
+    .gallery-img {
+        width: 500px;
+        height: 550px;
+    }
+
+    .gallery-image-tracker {
+        width: 90%;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .game-description-div {
+        width: 100%;
+    }
+
+    .creators-about-section {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+}
+
+/* =========================
+   PHONE (max-width: 768px)
+========================= */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .navbar a {
+        width: 80%;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    .home-page {
+        width: 95%;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .story-page,
+    .about-page {
+        width: 95%;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .gallery-div {
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .gallery-img {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+    }
+
+    .gallery-btn {
+        width: 40px;
+        height: 80px;
+    }
+
+    .gallery-image-tracker {
+        width: 95%;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .image-tracker {
+        width: 35px;
+    }
+
+    .verification-form label {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .verification-form label input {
+        width: 100%;
+    }
+
+    .game-description-div {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .download-game-btn {
+        width: 100%;
+        font-size: 1.2rem;
+    }
+
+    .creators-about-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-img {
+        width: 150px;
+    }
+}
+
+/* =========================
+   SMALL PHONE (max-width: 480px)
+========================= */
+@media (max-width: 480px) {
+    .navbar a {
+        font-size: 1rem;
+    }
+
+    .gallery-img {
+        max-width: 280px;
+        height: 320px;
+    }
+    .game-description-div {
+        max-width: 320px;
+    }
+
+    .verification-div {
+        width: 100%;
+        padding: 0.8rem;
+        box-sizing: border-box;
+    }
+
+    .verification-form {
+        width: 100%;
+    }
+
+    .verification-form label {
+        width: 100%;
+        gap: 0.3rem;
+    }
+
+    .verification-form label span {
+        font-size: 0.9rem;
+    }
+
+    .verification-form label input {
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.9rem;
+        padding: 0.4rem;
+        box-sizing: border-box;
+    }
+
+    .verify-btn {
+        width: 100%;
+        font-size: 0.95rem;
+        padding: 0.6rem;
+    }
+
+    .story-p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .about-name {
+        font-size: 1.2rem;
+    }
+
+    .about-story {
+        font-size: 0.9rem;
+    }
 }

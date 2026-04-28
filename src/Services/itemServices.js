@@ -17,6 +17,7 @@ export async function addItem(newItem) {
         .select();
 
     if (error) throw error;
-    return data;
+
+    return { data, error };
 }
 // GKDFgGXzDSOwAG4c  supas

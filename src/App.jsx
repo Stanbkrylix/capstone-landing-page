@@ -14,12 +14,15 @@ import {
 } from "react-router-dom";
 import "./App.css";
 
-import img1 from "./assets/adeptus-mechanicus.png";
-import img2 from "./assets/dark-angel-tyranids.png";
-import img3 from "./assets/dark-magician.png";
-import img4 from "./assets/man-in-fantasy-battlefield.png";
-import img5 from "./assets/spacewolf-daemon.png";
-import img6 from "./assets/warhammer-bloodAngel-necrons.png";
+import img1 from "./assets/game-menu-verification.PNG";
+import img2 from "./assets/game-levels.PNG";
+import img3 from "./assets/game-character-fighting.PNG";
+import img4 from "./assets/game-character-fighting-2.PNG";
+import img5 from "./assets/game-character-fighting-3.PNG";
+import img6 from "./assets/game-crystal-to-defend.PNG";
+import img7 from "./assets/game-environment.PNG";
+import img8 from "./assets/game-ingame-character.PNG";
+
 import aboutImg1 from "./assets/young-man-misty-city.png";
 import aboutImg2 from "./assets/young-man-desert-city.png";
 import aboutImg3 from "./assets/young-man-metro-city.png";
@@ -70,20 +73,23 @@ function About() {
     const [aboutInfo, setAboutInfo] = useState([
         {
             img: aboutImg1,
-            name: "Misty Man",
-            story: " Veniam est ut ad occaecat enim commodo officia anim excepteur sit dolore.",
+            role: "Lead Developer + Level Designer",
+            name: "Christian Alvarez",
+            story: " Assist In All level designs, as well as combining assets",
         },
 
         {
             img: aboutImg2,
-            name: "Desert Man",
-            story: " Veniam est ut ad occaecat enim commodo officia anim excepteur sit dolore.",
+            role: "Developer + Level Designer",
+            name: "Stanley Delva J",
+            story: " Created The Cave underground level",
         },
 
         {
             img: aboutImg3,
-            name: "Metro Man",
-            story: " Veniam est ut ad occaecat enim commodo officia anim excepteur sit dolore.",
+            role: "Developer + Level Designer",
+            name: "Hendrick Christian",
+            story: " Created the Coastal Stronghold level",
         },
     ]);
     return (
@@ -95,7 +101,8 @@ function About() {
                         <div className="creators-about-cards" key={i}>
                             <img src={info.img} alt="" className="about-img" />
                             <h2 className="about-name">{info.name}</h2>
-                            <p className="about-story">{info.story}</p>
+                            <h3 className="dev-role">{info.role}</h3>
+                            <p className="about-story">{info.story}.</p>
                         </div>
                     ))}
                 </div>
@@ -127,21 +134,22 @@ function Home() {
             <ScreenshotGallery />
             <div className="home-page">
                 <div className="game-description-div">
-                    <h1>The Amazing Tower Defense Game</h1>
+                    <h1>The Last StrongHold</h1>
                     <p>
-                        Anim do eiusmod in ut amet ullamco magna magna ipsum
-                        duis laboris sunt. Ea Lorem exercitation duis quis
-                        labore voluptate eiusmod consectetur irure.
+                        Please verify your age because this game is intended for
+                        audience of the age of 13 and up. Once you have verified
+                        your age, an email of the game will be sent to you,
+                        Thank you for your understanding.
                     </p>
                     <VerificationForm toEnableBtn={toEnableBtn} />
 
                     {/* <button className="download-game-btn">Play Now</button> */}
                 </div>
-                <div className="qr-code-div">
+                {/* <div className="qr-code-div">
                     <h2>Verify Age for</h2>
                     <h1>QR Code</h1>
                     <img src="" alt="" className="qr-img" />
-                </div>
+                </div> */}
             </div>
         </>
     );
@@ -180,8 +188,23 @@ function VerificationForm({ toEnableBtn }) {
             return;
         }
 
-        addItem(formInput).then((data) => {
-            console.log("added item", data);
+        addItem(formInput).then((response) => {
+            if (!response.error) {
+                console.log("data ", response.data);
+                const emailToSend = response.data[0].email;
+
+                SendEmailReal(emailToSend)
+                    .then((data) => {
+                        console.log("success", data);
+                    })
+                    .catch((error) => {
+                        console.log("Error", error);
+                    });
+                return;
+            }
+
+            alert("Error Email could not be sent, try again");
+            return;
         });
 
         getItems().then((data) => {
@@ -189,7 +212,6 @@ function VerificationForm({ toEnableBtn }) {
             console.log(data);
         });
 
-        SendEmailReal();
         resetFormInputs();
         toEnableBtn();
 
@@ -219,7 +241,7 @@ function VerificationForm({ toEnableBtn }) {
                     <input
                         type="text"
                         name="name"
-                        placeholder="name"
+                        placeholder="Enter your name"
                         value={formInput.name}
                         onChange={handleChange}
                     />
@@ -231,7 +253,7 @@ function VerificationForm({ toEnableBtn }) {
                         type="number"
                         name="age"
                         id=""
-                        placeholder="age"
+                        placeholder="Enter your age"
                         value={formInput.age}
                         onChange={handleChange}
                     />
@@ -242,7 +264,7 @@ function VerificationForm({ toEnableBtn }) {
                     <input
                         type="email"
                         name="email"
-                        placeholder="email"
+                        placeholder="Enter your email"
                         value={formInput.email}
                         onChange={handleChange}
                     />
@@ -264,6 +286,8 @@ function ScreenshotGallery() {
         img4,
         img5,
         img6,
+        img7,
+        img8,
     ]);
 
     useEffect(() => {
@@ -331,15 +355,21 @@ function ScreenshotGallery() {
 function Story() {
     return (
         <div className="story-page">
-            <h1>About the Story</h1>
-            <p>
-                Excepteur sit nulla ipsum exercitation velit nostrud.Lorem
-                exercitation Lorem fugiat Lorem anim cillum ex irure
-                veniam.Fugiat culpa aliquip ipsum fugiat adipisicing culpa esse
-                anim.Minim reprehenderit dolor consequat aliqua nulla ullamco
-                nostrud.Exercitation dolore magna exercitation non aliquip
-                cupidatat non commodo consectetur nisi amet eiusmod.Lorem ipsum
-                aute non aute adipisicing adipisicing velit nulla.
+            <h1>Story</h1>
+            <p className="story-p">
+                After a catastrophic arcane disaster shatters the ancient
+                Strongholds and unleashes corruption across the land, a lone
+                young acolyte must rise in place of the fallen scholars to
+                protect the sacred obelisks that maintain the world’s magical
+                balance. Journeying through the ruined Mountain Stronghold, the
+                hidden Underground Stronghold, and the final Coastal Stronghold,
+                you rebuild forgotten magical defenses and battle waves of
+                corrupted creatures and powerful guardians twisted by dark
+                magic. Along the way, you uncover the truth behind the
+                catastrophe: a Fallen Sorcerer who fused himself with corruption
+                to seize control of the world’s arcane power. In a final
+                desperate battle, you confront him and restore balance, forging
+                your destiny as the first Arcane Guardian.
             </p>
         </div>
     );
