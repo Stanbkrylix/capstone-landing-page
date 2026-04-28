@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-import { supabase } from "./Services/supabaseClient";
+// import { v4 as uuidv4 } from "uuid";
+// import { supabase } from "./Services/supabaseClient";
 import { getItems, addItem } from "./Services/itemServices";
 import SendEmailReal from "./Services/email";
 
@@ -190,15 +190,17 @@ function VerificationForm({ toEnableBtn }) {
 
         addItem(formInput).then((response) => {
             if (!response.error) {
-                console.log("data ", response.data);
+                // console.log("data ", response.data);
                 const emailToSend = response.data[0].email;
 
                 SendEmailReal(emailToSend)
                     .then((data) => {
-                        console.log("success", data);
+                        alert(
+                            "Your info is saved, link has been sent to your email.",
+                        );
                     })
                     .catch((error) => {
-                        console.log("Error", error);
+                        alert("Error! please try again");
                     });
                 return;
             }
@@ -207,10 +209,11 @@ function VerificationForm({ toEnableBtn }) {
             return;
         });
 
-        getItems().then((data) => {
-            console.log("from console log", formInput);
-            console.log(data);
-        });
+        getItems();
+        // .then((data) => {
+        //     console.log("from console log", formInput);
+        //     console.log(data);
+        // });
 
         resetFormInputs();
         toEnableBtn();
